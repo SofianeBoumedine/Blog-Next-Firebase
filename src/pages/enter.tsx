@@ -80,9 +80,9 @@ function UsernameForm() {
         }
     };
 
-    useEffect(()=>{
-        checkUsername(formValue);
-    }, [formValue]);
+    // useEffect(()=>{
+    //     checkUsername(formValue);
+    // }, [formValue]);
 
     const checkUsername = useCallback(
         debounce(async (username) => {

@@ -2,6 +2,7 @@ import { UserContext } from '@/lib/context';
 import Link from 'next/link';
 import { useContext } from 'react';
 import Image from "next/image";
+import { auth } from '@/lib/firebase';
 
 
 export default function Navbar(){
@@ -9,8 +10,6 @@ export default function Navbar(){
     // const username = true;
     // const {user, username} = { };
     const {user, username} = useContext(UserContext);
-    console.log(user);
-    console.log(user?.photoURL);
     console.log(username);
 
     return (
@@ -21,8 +20,14 @@ export default function Navbar(){
                         <button className="btn-logo">Feed</button>
                     </Link>
                 </li>
+                
                 {username && (
                     <>
+                    <li className="push-left">
+                        {username && (
+                            <button onClick={()=> auth.signOut()}>Déconnexion</button>
+                        )}
+                    </li>
                     <li className="push-left">
                         <Link href="/admin">
                             <button className="btn-blue">Crée un article</button>
