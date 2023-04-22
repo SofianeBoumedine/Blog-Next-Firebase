@@ -39,3 +39,33 @@ export const firestore = firebase.firestore();
 export const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp;
 export const storage = firebase.storage();
 export const increment = firebase.firestore.FieldValue.increment;
+
+
+
+/// Helper functions
+
+/**``
+* Gets un users/uid document with username
+* @param {string} username
+*/
+export async function getUserWithUsername(username){
+    const usersRef = firestore.collection('users');
+    const query = usersRef.where('username', '==', username).limit(1);
+    const userDoc = (await query.get()).docs[0];
+    return userDoc;
+}
+
+/**``
+* Gets un users/uid document with username
+* @param {DocumentSnapshot} doc
+*/
+export function postToJSON(doc) {
+    const data = doc.data();
+    console.log("POSTTOJSON",data);
+    return {
+        ...data,
+        updatedAt: data?.updatedAt?.toMillis() || 0,
+        createdAt: data?.createdAt?.toMillis() || 0,
+    };
+}
+export const fromMillis = firebase.firestore.Timestamp.fromMillis;

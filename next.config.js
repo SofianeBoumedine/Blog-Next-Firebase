@@ -16,4 +16,14 @@ module.exports = {
       },
     ],
   },
+  img: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  }
 }
