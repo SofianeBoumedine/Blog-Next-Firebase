@@ -55,7 +55,8 @@ function PostManager() {
 }
 
 function PostForm({defaultValues, postRef, preview}){
-  const {register, handleSubmit, reset, watch} = useForm({defaultValues, mode: 'onChange'})
+  const {register, handleSubmit, reset, watch, formState: {errors, isValid, isDirty}} = useForm({defaultValues, mode: 'onChange'})
+  // const {isValid, isDirty} = formState;
 
   const updatePost = async ({content, published}) => {
     console.log(content);
@@ -78,13 +79,18 @@ function PostForm({defaultValues, postRef, preview}){
         </div>
       )}
       <div className={preview ? styles.hidden : styles.controls}>
-        <textarea name="content" {...register("content")}></textarea>
+        <textarea name="content" {...register("content",{
+          maxLength: {value: 2000, message: 'contenu trop long'},
+          minLength: {value: 10, message: 'contenu trop court'},
+          required: {value: true, message: 'contenu requis'}
+        })}></textarea>
+        {errors.content && <p className='text-danger'>{errors.content.message}</p>}
         <fieldset>
           <input className={styles.checkbox} name="published" type="checkbox" {...register("published")}/>
           <label>Publié</label>
         </fieldset>
 
-        <button type="submit" className="btn-green">
+        <button type="submit" className="btn-green" disabled={!isDirty || !isValid}>
           Sauvegarder
         </button>
       </div>
