@@ -1,9 +1,9 @@
 import Head from "next/head";
 
 export default function Metatags({
-    title = "Test",
-    description= "tesT3",
-    image = 'https//fireship.io/courses/react-next-firebase/img/featured.png',
+    title,
+    description,
+    image,
 }) {
     return (
         <Head>

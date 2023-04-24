@@ -19,6 +19,11 @@ export async function getServerSideProps({query}){
 
     posts=(await postsQuery.get()).docs.map(postToJSON)
   }
+  if(!userDoc) {
+    return {
+      notFound: true,
+    }
+  }
   return {
     props: {user, posts},
   }
