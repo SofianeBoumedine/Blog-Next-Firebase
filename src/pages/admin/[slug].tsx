@@ -9,6 +9,7 @@ import { useDocumentData } from "react-firebase-hooks/firestore";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import ReactMarkDown from "react-markdown";
+import ImageUploader from '@/components/ImageUploader';
 
 export default function AdminPostEdit(props) {
   return (
@@ -27,7 +28,6 @@ function PostManager() {
   const postRef = firestore.collection('users').doc(auth.currentUser.uid).collection('posts').doc(slug);
   const [post] = useDocumentData(postRef);
 
-  console.log(post);
 
   return(
     <main className={styles.container}>
@@ -59,8 +59,6 @@ function PostForm({defaultValues, postRef, preview}){
   // const {isValid, isDirty} = formState;
 
   const updatePost = async ({content, published}) => {
-    console.log(content);
-    console.log(published);
     await postRef.update({
       content,
       published,
@@ -79,6 +77,7 @@ function PostForm({defaultValues, postRef, preview}){
         </div>
       )}
       <div className={preview ? styles.hidden : styles.controls}>
+        <ImageUploader></ImageUploader>
         <textarea name="content" {...register("content",{
           maxLength: {value: 2000, message: 'contenu trop long'},
           minLength: {value: 10, message: 'contenu trop court'},

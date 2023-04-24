@@ -38,6 +38,7 @@ export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 export const firestore = firebase.firestore();
 export const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp;
 export const storage = firebase.storage();
+export const STATE_CHANGED = firebase.storage.TaskEvent.STATE_CHANGED;
 export const increment = firebase.firestore.FieldValue.increment;
 
 
@@ -61,7 +62,6 @@ export async function getUserWithUsername(username){
 */
 export function postToJSON(doc) {
     const data = doc.data();
-    console.log("POSTTOJSON",data);
     return {
         ...data,
         updatedAt: data?.updatedAt?.toMillis() || 0,

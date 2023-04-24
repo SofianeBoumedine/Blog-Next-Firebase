@@ -50,7 +50,6 @@ function UsernameForm() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        console.log(formValue);
         // @ts-ignore: Object is possibly 'null'.
         const userDoc = firestore.doc(`users/${user.uid}`);
         const usernameDoc = firestore.doc(`usernames/${formValue}`);
@@ -69,13 +68,11 @@ function UsernameForm() {
         const re = /^(?=[a-zA-Z0-9._]{3,15}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
 
         if (val.length<3){
-            console.log(val)
             setFormValue(val);
             setLoading(false);
             setIsValid(false);
         }
         if(re.test(val)){
-            console.log(val)
             setFormValue(val);
             setLoading(true);
             setIsValid(false);

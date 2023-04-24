@@ -15,7 +15,6 @@ const inter = Inter({ subsets: ['latin'] })
 const LIMIT = 10;
 
 export async function getServerSideProps(context) {
-  console.log("TEST33", context);
   const postsQuery = firestore
   .collectionGroup('posts')
   .where('published', '==', true)

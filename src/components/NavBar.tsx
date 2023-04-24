@@ -10,7 +10,6 @@ export default function Navbar(){
     // const username = true;
     // const {user, username} = { };
     const {user, username} = useContext(UserContext);
-    console.log(username);
 
     return (
         <nav className='navbar'>
