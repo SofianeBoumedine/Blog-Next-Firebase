@@ -69,20 +69,22 @@ function UsernameForm() {
         const re = /^(?=[a-zA-Z0-9._]{3,15}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
 
         if (val.length<3){
+            console.log(val)
             setFormValue(val);
             setLoading(false);
             setIsValid(false);
         }
         if(re.test(val)){
+            console.log(val)
             setFormValue(val);
             setLoading(true);
             setIsValid(false);
         }
     };
 
-    // useEffect(()=>{
-    //     checkUsername(formValue);
-    // }, [formValue]);
+    useEffect(()=>{
+        checkUsername(formValue);
+    }, [formValue]);
 
     const checkUsername = useCallback(
         debounce(async (username) => {
